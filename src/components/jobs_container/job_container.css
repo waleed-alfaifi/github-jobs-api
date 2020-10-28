@@ -1,0 +1,11 @@
+.load-more-button {
+  background-color: #5964e0;
+}
+
+.load-more-button:hover {
+  background-color: #939bf4;
+}
+
+.load-more-button:focus {
+  background-color: #939bf4;
+}

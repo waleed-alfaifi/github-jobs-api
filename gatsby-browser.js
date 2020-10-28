@@ -4,4 +4,6 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 
-// You can delete this file if you're not using it
+import './src/styles/css/output.css';
+import './src/styles/css/line-awesome.min.css';
+import './src/styles/css/main.css';
