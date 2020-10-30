@@ -26,8 +26,8 @@ const JobContainer = () => {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
     try {
-      // const res = await fetch(proxyUrl + githubJobsUrl);
-      const res = await fetch('/data.json');
+      const res = await fetch(proxyUrl + githubJobsUrl);
+      // const res = await fetch('/data.json');
       const data = await res.json();
 
       dispatch({ type: 'update_jobs', payload: data });
