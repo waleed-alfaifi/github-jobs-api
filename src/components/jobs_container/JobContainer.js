@@ -6,12 +6,17 @@ import JobsContext from '../../context/JobsContext';
 import './job_container.css';
 
 const JobContainer = () => {
-  const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [fetchedAllJobs, setFetchedAllJobs] = useState(false);
 
   const {
-    jobsState: { jobs, titleQuery, location_query, is_fulltime_query },
+    jobsState: {
+      jobs,
+      apiPage,
+      titleQuery,
+      location_query,
+      is_fulltime_query,
+      fetchedAllJobs,
+    },
     dispatch,
   } = useContext(JobsContext);
 
@@ -22,7 +27,7 @@ const JobContainer = () => {
   }, []);
 
   const fetchJobs = async () => {
-    const githubJobsUrl = `https://jobs.github.com/positions.json?page=${page}`;
+    const githubJobsUrl = `https://jobs.github.com/positions.json?page=${apiPage}`;
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
     try {
@@ -31,10 +36,10 @@ const JobContainer = () => {
       const data = await res.json();
 
       dispatch({ type: 'update_jobs', payload: data });
-      setPage((prevPage) => prevPage + 1);
+      dispatch({ type: 'update_page' });
 
       if (data.length === 0) {
-        setFetchedAllJobs(true);
+        dispatch({ type: 'fetched_all_jobs' });
       }
 
       return true;
@@ -66,6 +71,7 @@ const JobContainer = () => {
         ) {
           return (
             <JobCard
+              jobId={job.id}
               key={job.id}
               imgSource={job.company_logo}
               creationDate={job.created_at}

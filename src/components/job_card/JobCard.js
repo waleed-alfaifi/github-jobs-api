@@ -3,10 +3,12 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import './job_card.css';
+import { Link } from 'gatsby';
 
 dayjs.extend(relativeTime);
 
 const JobCard = ({
+  jobId,
   imgSource,
   creationDate,
   type,
@@ -31,7 +33,9 @@ const JobCard = ({
         <span className="mr-2">{dayjs(creationDate).fromNow()}</span> &#183;
         <span className="ml-4">{type}</span>
       </p>
-      <h3 className="job-title mb-3">{title}</h3>
+      <h3 className="job-title mb-3">
+        <Link to={`/job/${jobId}`}>{title}</Link>
+      </h3>
       <p className="job-company-name mb-10">{companyName}</p>
       <div className="job-location font-bold">{location}</div>
     </div>

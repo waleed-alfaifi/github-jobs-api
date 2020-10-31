@@ -4,6 +4,8 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 import Header from './header/header';
 
+import { JobsProvider } from '../context/JobsContext';
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -18,9 +20,11 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div className="container mx-auto px-10">
-        <main>{children}</main>
-      </div>
+      <JobsProvider>
+        <div className="container mx-auto px-10">
+          <main>{children}</main>
+        </div>
+      </JobsProvider>
     </>
   );
 };
