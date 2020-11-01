@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import JobsContext from '../../context/JobsContext';
 
@@ -10,7 +10,14 @@ const SearchInput = () => {
   const [titleQuery, setTitleQuery] = useState('');
   const [isModalShown, setIsModalShown] = useState(false);
 
-  const { dispatch } = useContext(JobsContext);
+  const {
+    jobsState: { titleQuery: globalTitleQuery },
+    dispatch,
+  } = useContext(JobsContext);
+
+  useEffect(() => {
+    setTitleQuery(globalTitleQuery);
+  }, []);
 
   const queryTitle = (e) => {
     e.preventDefault();

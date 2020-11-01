@@ -1,0 +1,35 @@
+.job-detail-company-url {
+  color: #5964e0;
+  background-color: rgba(89, 100, 224, 0.1);
+}
+
+.job-detail-html-description {
+  color: #6e8098;
+  line-height: 2.6rem;
+}
+
+.job-detail-html-description h1,
+.job-detail-html-description h2,
+.job-detail-html-description h3,
+.job-detail-html-description h4,
+.job-detail-html-description h5,
+.job-detail-html-description h6,
+.job-detail-html-description strong {
+  display: inline-block;
+  color: #19202d;
+  font-size: 2rem;
+  /* To seperate each section from another */
+  margin-top: 4rem;
+  /* Between the section's header and the section cotent */
+  margin-bottom: 0.8rem;
+}
+
+/* To pervent extra margin on the top */
+.job-detail-html-description p:first-child strong {
+  margin-top: 0;
+}
+
+/* To avoid any overflow of the page */
+.job-detail-html-description pre {
+  white-space: pre-wrap;
+}
