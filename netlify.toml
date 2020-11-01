@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/job/*"
+  to = "/job/index.html"
+  status = 200
