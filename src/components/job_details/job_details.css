@@ -18,18 +18,32 @@
   display: inline-block;
   color: #19202d;
   font-size: 2rem;
-  /* To seperate each section from another */
-  margin-top: 4rem;
-  /* Between the section's header and the section cotent */
-  margin-bottom: 0.8rem;
 }
 
-/* To pervent extra margin on the top */
-.job-detail-html-description p:first-child strong {
-  margin-top: 0;
+.job-detail-html-description > * {
+  margin-bottom: 2rem;
 }
 
 /* To avoid any overflow of the page */
 .job-detail-html-description pre {
   white-space: pre-wrap;
+}
+
+.job-detail-how-to-apply {
+  background-image: url('/img/mobile/bg-pattern-detail-footer.svg');
+  background-origin: border-box;
+  background-position: right;
+  background-size: cover;
+  border-radius: 0.6rem;
+}
+
+.job-detail-how-to-apply-paragraph {
+  word-wrap: break-word;
+}
+
+.job-detail-apply-now-footer {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
 }

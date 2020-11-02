@@ -12,6 +12,7 @@ const JobDetails = ({ jobId }) => {
     jobsState: { jobs },
   } = useContext(JobsContext);
   const [job, setJob] = useState({});
+  const [applyUrl, setApplyUrl] = useState('');
 
   useEffect(() => {
     const currentJob = jobs.filter?.((job) => job.id === jobId)[0];
@@ -30,7 +31,6 @@ const JobDetails = ({ jobId }) => {
 
     try {
       const res = await fetch(proxyUrl + githubJobUrl);
-      // const res = await fetch('/data.json');
       const data = await res.json();
 
       setJob(data);
@@ -42,8 +42,21 @@ const JobDetails = ({ jobId }) => {
     }
   };
 
+  useEffect(() => {
+    setApplyUrl(getApplyUrl(job.how_to_apply) || job.company_url);
+  }, [job]);
+
+  const getApplyUrl = (applyHtml) => {
+    const parsedEl = document.createElement('html');
+    parsedEl.innerHTML = applyHtml;
+
+    const applyUrlElement = parsedEl.querySelector('a[href]');
+
+    return applyUrlElement?.getAttribute('href');
+  };
+
   return (
-    <div>
+    <div className="job-detail-container">
       <SEO title={job.title || 'Job'} />
       <JobDetailsHeader job={job} />
 
@@ -53,12 +66,32 @@ const JobDetails = ({ jobId }) => {
           type={job.type}
           title={job.title}
           location={job.location}
+          applyLink={applyUrl}
         />
 
         <div
           dangerouslySetInnerHTML={{ __html: job.description }}
           className="job-detail-html-description"
         />
+      </div>
+      <section className="job-detail-how-to-apply p-12 mt-12 mb-8 text-white">
+        <h3 className="mb-8">How to apply</h3>
+        <p
+          dangerouslySetInnerHTML={{ __html: job.how_to_apply }}
+          className="job-detail-how-to-apply-paragraph"
+        ></p>
+      </section>
+
+      <div className="job-detail-apply-now-footer bg-white rounded-md p-10">
+        <a
+          className="filter-modal-search-button inline-block text-center px-12 pt-6 pb-5 w-full text-white rounded-md transition transition-all
+                         duration-100 transform focus:translate-y-1 focus:outline-none"
+          href={applyUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Apply Now
+        </a>
       </div>
     </div>
   );

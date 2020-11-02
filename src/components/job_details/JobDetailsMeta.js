@@ -4,7 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
-const JobDetailsMeta = ({ created_at, type, title, location }) => {
+const JobDetailsMeta = ({ created_at, type, title, location, applyLink }) => {
   return (
     <div className="mb-12">
       <p className="job-card-metadata mb-3">
@@ -13,13 +13,15 @@ const JobDetailsMeta = ({ created_at, type, title, location }) => {
       </p>
       <h3 className="job-title mb-3">{title}</h3>
       <div className="job-location font-bold">{location}</div>
-      <button
-        className="filter-modal-search-button px-12 pt-6 pb-5 mt-8 w-full text-white rounded-md transition transition-all
+      <a
+        className="filter-modal-search-button inline-block text-center px-12 pt-6 pb-5 mt-8 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
-        type="submit"
+        href={applyLink}
+        target="_blank"
+        rel="noreferrer"
       >
         Apply Now
-      </button>
+      </a>
     </div>
   );
 };
