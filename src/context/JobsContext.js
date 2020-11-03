@@ -7,6 +7,7 @@ const initialState = {
   location_query: '',
   is_fulltime_query: false,
   fetchedAllJobs: false,
+  failedFetching: false,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -24,6 +25,8 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state, is_fulltime_query: payload };
     case 'fetched_all_jobs':
       return { ...state, fetchedAllJobs: true };
+    case 'failed_fetching':
+      return { ...state, failedFetching: true };
     default:
       return state;
   }

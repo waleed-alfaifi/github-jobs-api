@@ -16,6 +16,7 @@ const JobContainer = () => {
       location_query,
       is_fulltime_query,
       fetchedAllJobs,
+      failedFetching,
     },
     dispatch,
   } = useContext(JobsContext);
@@ -28,11 +29,11 @@ const JobContainer = () => {
 
   const fetchJobs = async () => {
     const githubJobsUrl = `https://jobs.github.com/positions.json?page=${apiPage}`;
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const proxyUrl = 'https://cors-anywhere.herokuapp.net/';
 
     try {
-      const res = await fetch(proxyUrl + githubJobsUrl);
-      // const res = await fetch('/data.json');
+      const requestUrl = proxyUrl + githubJobsUrl;
+      const res = await fetch(requestUrl);
       const data = await res.json();
 
       dispatch({ type: 'update_jobs', payload: data });
@@ -41,6 +42,24 @@ const JobContainer = () => {
       if (data.length === 0) {
         dispatch({ type: 'fetched_all_jobs' });
       }
+
+      return true;
+    } catch (err) {
+      console.error(err);
+      await fetchJobsAlternative();
+      dispatch({ type: 'failed_fetching' });
+
+      return false;
+    }
+  };
+
+  const fetchJobsAlternative = async () => {
+    try {
+      const requestUrl = '/data.json';
+      const res = await fetch(requestUrl);
+      const data = await res.json();
+
+      dispatch({ type: 'update_jobs', payload: data });
 
       return true;
     } catch (err) {
@@ -63,6 +82,19 @@ const JobContainer = () => {
 
   return (
     <div>
+      {failedFetching && (
+        <div className="bg-red-600 p-8 mb-16 -mt-8 rounded-md text-white">
+          <p>
+            <strong>Warning</strong>: If you are seeing this message, that means
+            there is something wrong with the Jobs API, the sadness 😢.
+          </p>
+          <p>
+            No one knows when it will come back to work but you can try
+            reloading the page. Until then I have put some old jobs data for you
+            to try out the website, but bear in mind they might be outdated.
+          </p>
+        </div>
+      )}
       {jobs.map((job, index) => {
         if (
           filterBy(job.title, titleQuery) &&
@@ -86,7 +118,7 @@ const JobContainer = () => {
 
         return '';
       })}
-      {jobs.length > 0 && !fetchedAllJobs && (
+      {jobs.length > 0 && !fetchedAllJobs && !failedFetching && (
         <div className="text-center mt-16 mb-24">
           <button
             className="load-more-button px-12 pt-6 pb-5 text-white rounded-md transition transition-all duration-100 transform focus:translate-y-1 focus:outline-none"
