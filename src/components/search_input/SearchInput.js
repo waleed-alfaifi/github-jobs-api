@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import 'twin.macro';
 
 import JobsContext from '../../context/JobsContext';
 
@@ -31,36 +32,40 @@ const SearchInput = () => {
   return (
     <>
       <form
-        className="search-container relative w-full h-32"
+        tw="relative w-full h-32"
+        className="search-container"
         onSubmit={queryTitle}
       >
-        <label htmlFor="title-filter" className="">
+        <label htmlFor="title-filter">
           <input
             type="text"
             name="Title filter"
             id="title-filter"
             placeholder="Filter by title..."
-            className="search-input w-full h-full px-8 focus:outline-none focus:shadow-md hover:shadow-md"
+            tw="w-full h-full px-8 focus:outline-none focus:shadow-md hover:shadow-md"
+            className="search-input"
             value={titleQuery}
             onChange={onChangeTitleQuery}
           />
         </label>
 
         <button
-          className="filter-button absolute transition-all duration-200 focus:outline-none"
+          tw="absolute transition-all duration-200 focus:outline-none"
+          className="filter-button"
           onClick={() => setIsModalShown(true)}
           type="button"
         >
           <img src={filterIcon} alt="Filter jobs" />
         </button>
         <button
-          className="search-button absolute right-0 mr-8 
+          tw="absolute right-0 mr-8 
         flex justify-center items-center h-16 w-16 text-white 
         transition-all duration-200 focus:outline-none focus:shadow-md 
         hover:shadow-md"
           type="submit"
+          className="search-button"
         >
-          <i className="las la-search transform -rotate-90 scale-125"></i>
+          <i tw="transform -rotate-90 scale-125" className="las la-search"></i>
         </button>
       </form>
 

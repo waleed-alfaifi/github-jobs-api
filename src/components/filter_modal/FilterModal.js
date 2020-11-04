@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import 'twin.macro';
 
 import JobContext from '../../context/JobsContext';
 
@@ -33,45 +34,53 @@ const FilterModal = ({ setIsModalShown }) => {
       <div className="filter-modal" onClick={() => setIsModalShown(false)}>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
-          className="filter-modal-content bg-white rounded-md"
+          tw="bg-white rounded-md"
+          className="filter-modal-content"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="location-container relative pr-10 py-8">
+          <div tw="relative pr-10 py-8" className="location-container">
             <img
               src={locationIcon}
               alt="Filter jobs"
-              className="location-icon absolute left-0"
+              tw="absolute left-0"
+              className="location-icon"
             />
             <input
               type="text"
               placeholder="Filter by location..."
-              className="focus:outline-none"
+              tw="focus:outline-none"
               value={locationQuery}
               onChange={(e) => setLocationQuery(e.target.value)}
               autoFocus
             />
           </div>
           <hr />
-          <div className="modal-input-container pr-10">
+          <div tw="pr-10" className="modal-input-container">
             <input
               type="checkbox"
               name="full_time"
               id="full_time"
-              className="full-time-checkbox opacity-0"
+              tw="opacity-0"
+              className="full-time-checkbox"
               checked={isFulltime}
               onChange={(e) => setIsFulltime(e.target.checked)}
             />
             <label
               htmlFor="full_time"
-              className="full-time-label relative flex items-start"
+              tw="relative flex items-start"
+              className="full-time-label"
             >
-              <span className="font-bold">Full Time Only</span>
-              <i className="full-time-check-mark las la-check absolute left-0 top-0 text-white opacity-0"></i>
+              <span tw="font-bold">Full Time Only</span>
+              <i
+                tw="absolute text-white opacity-0"
+                className="full-time-check-mark las la-check"
+              ></i>
             </label>
 
             <button
-              className="filter-modal-search-button px-12 pt-6 pb-5 mt-8 w-full text-white rounded-md transition transition-all
+              tw="px-12 pt-6 pb-5 mt-8 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
+              className="filter-modal-search-button"
               type="submit"
             >
               Search

@@ -33,6 +33,7 @@ module.exports = {
         postCssPlugins: [require('tailwindcss'), require('autoprefixer')],
       },
     },
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-create-client-paths`,
       options: { prefixes: [`/job/*`] },

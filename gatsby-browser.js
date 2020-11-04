@@ -1,4 +1,4 @@
-require('./src/styles/css/output.css');
+require('tailwindcss/dist/base.min.css');
 require('./src/styles/css/line-awesome.min.css');
 require('./src/styles/css/main.css');
 

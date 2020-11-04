@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import 'twin.macro';
 
 import JobsContext from '../../context/JobsContext';
 import SEO from '../seo';
@@ -60,7 +61,7 @@ const JobDetails = ({ jobId }) => {
       <SEO title={job.title || 'Job'} />
       <JobDetailsHeader job={job} />
 
-      <div className="bg-white px-10 py-16 text-left">
+      <div tw="bg-white px-10 py-16 text-left">
         <JobDetailsMeta
           created_at={job.created_at}
           type={job.type}
@@ -74,18 +75,25 @@ const JobDetails = ({ jobId }) => {
           className="job-detail-html-description"
         />
       </div>
-      <section className="job-detail-how-to-apply p-12 mt-12 mb-8 text-white">
-        <h3 className="mb-8">How to apply</h3>
+      <section
+        tw="p-12 mt-12 mb-8 text-white"
+        className="job-detail-how-to-apply"
+      >
+        <h3 tw="mb-8">How to apply</h3>
         <p
           dangerouslySetInnerHTML={{ __html: job.how_to_apply }}
           className="job-detail-how-to-apply-paragraph"
         ></p>
       </section>
 
-      <div className="job-detail-apply-now-footer bg-white rounded-md p-10">
+      <div
+        tw="bg-white rounded-md p-10"
+        className="job-detail-apply-now-footer"
+      >
         <a
-          className="filter-modal-search-button inline-block text-center px-12 pt-6 pb-5 w-full text-white rounded-md transition transition-all
+          tw="inline-block text-center px-12 pt-6 pb-5 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
+          className="filter-modal-search-button"
           href={applyUrl}
           target="_blank"
           rel="noreferrer"

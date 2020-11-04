@@ -1,4 +1,5 @@
 import React from 'react';
+import 'twin.macro';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
@@ -19,9 +20,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      {/* <GlobalStyles /> */}
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <JobsProvider>
-        <div className="container mx-auto px-10">
+        <div tw="container mx-auto px-10">
           <main>{children}</main>
         </div>
       </JobsProvider>
