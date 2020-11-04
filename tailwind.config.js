@@ -5,7 +5,7 @@ module.exports = {
     defaultLineHeights: true,
     standardFontWeights: true,
   },
-  purge: [],
+  purge: ['./src/**/*.js', './src/**/*.jsx'],
   theme: {},
   variants: {},
   plugins: [],
