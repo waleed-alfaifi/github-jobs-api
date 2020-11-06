@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
+import styled from 'styled-components';
 import 'twin.macro';
 import JobCard from '../job_card/JobCard';
 
 import JobsContext from '../../context/JobsContext';
 
-import './job_container.css';
+const LoadMoreButton = styled.button`
+  background-color: #5964e0;
+  &:hover,
+  &:focus {
+    background-color: #939bf4;
+  }
+`;
 
 const JobContainer = () => {
   const [loadingMore, setLoadingMore] = useState(false);
@@ -30,7 +37,8 @@ const JobContainer = () => {
 
   const fetchJobs = async () => {
     const githubJobsUrl = `https://jobs.github.com/positions.json?page=${apiPage}`;
-    const proxyUrl = 'https://cors-anywhere.herokuapp.net/';
+    const proxyUrl = '';
+    // const proxyUrl = 'https://cors-anywhere.herokuapp.net/';
 
     try {
       const requestUrl = proxyUrl + githubJobsUrl;
@@ -119,18 +127,18 @@ const JobContainer = () => {
 
         return '';
       })}
+
       {jobs.length > 0 && !fetchedAllJobs && !failedFetching && (
         <div tw="text-center mt-16 mb-24">
-          <button
+          <LoadMoreButton
             tw="px-12 pt-6 pb-5 text-white rounded-md transition transition-all duration-100 transform focus:translate-y-1 focus:outline-none"
-            className="load-more-button"
             onClick={() => loadMore()}
           >
             Load More
             {loadingMore && (
               <i tw="ml-2 animate-spin" className="las la-spinner"></i>
             )}
-          </button>
+          </LoadMoreButton>
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import styled from 'styled-components';
 import 'twin.macro';
 
 import JobsContext from '../../context/JobsContext';
@@ -6,7 +7,64 @@ import SEO from '../seo';
 import JobDetailsHeader from './JobDetailsHeader';
 import JobDetailsMeta from './JobDetailsMeta';
 
-import './job_details.css';
+const Description = styled.div`
+  color: #6e8098;
+  line-height: 2.6rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong {
+    display: inline-block;
+    color: #19202d;
+    font-size: 2rem;
+  }
+
+  > * {
+    margin-bottom: 2rem;
+  }
+
+  * {
+    word-wrap: break-word;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+`;
+
+const HowToApply = styled.section`
+  background-image: url('/img/mobile/bg-pattern-detail-footer.svg');
+  background-origin: border-box;
+  background-position: right;
+  background-size: cover;
+  border-radius: 0.6rem;
+
+  p {
+    word-wrap: break-word;
+  }
+`;
+
+const ApplyNow = styled.div`
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  a {
+    background-color: #5964e0;
+
+    &:hover,
+    &:focus {
+      background-color: #939bf4;
+    }
+  }
+`;
 
 const JobDetails = ({ jobId }) => {
   const {
@@ -57,10 +115,9 @@ const JobDetails = ({ jobId }) => {
   };
 
   return (
-    <div className="job-detail-container">
+    <div>
       <SEO title={job.title || 'Job'} />
       <JobDetailsHeader job={job} />
-
       <div tw="bg-white px-10 py-16 text-left">
         <JobDetailsMeta
           created_at={job.created_at}
@@ -69,38 +126,23 @@ const JobDetails = ({ jobId }) => {
           location={job.location}
           applyLink={applyUrl}
         />
-
-        <div
-          dangerouslySetInnerHTML={{ __html: job.description }}
-          className="job-detail-html-description"
-        />
+        <Description dangerouslySetInnerHTML={{ __html: job.description }} />
       </div>
-      <section
-        tw="p-12 mt-12 mb-8 text-white"
-        className="job-detail-how-to-apply"
-      >
+      <HowToApply tw="p-12 mt-12 mb-8 text-white">
         <h3 tw="mb-8">How to apply</h3>
-        <p
-          dangerouslySetInnerHTML={{ __html: job.how_to_apply }}
-          className="job-detail-how-to-apply-paragraph"
-        ></p>
-      </section>
-
-      <div
-        tw="bg-white rounded-md p-10"
-        className="job-detail-apply-now-footer"
-      >
+        <p dangerouslySetInnerHTML={{ __html: job.how_to_apply }}></p>
+      </HowToApply>
+      <ApplyNow tw="bg-white rounded-md p-10">
         <a
           tw="inline-block text-center px-12 pt-6 pb-5 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
-          className="filter-modal-search-button"
           href={applyUrl}
           target="_blank"
           rel="noreferrer"
         >
           Apply Now
         </a>
-      </div>
+      </ApplyNow>
     </div>
   );
 };

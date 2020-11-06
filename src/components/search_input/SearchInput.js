@@ -1,11 +1,45 @@
 import React, { useState, useEffect, useContext } from 'react';
+import styled from 'styled-components';
 import 'twin.macro';
-
 import JobsContext from '../../context/JobsContext';
-
-import './search_input.css';
 import filterIcon from '../../images/mobile/icon-filter.svg';
 import FilterModal from '../filter_modal/FilterModal';
+
+const SearchForm = styled.form`
+  top: -4.4rem;
+`;
+
+const StyledSearchInput = styled.input`
+  border-radius: 0.6rem;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+`;
+
+const FilterButton = styled.button`
+  top: 50%;
+  right: 8.2rem;
+  transform: translateY(-50%);
+
+  &:active {
+    transform: translateY(-46%);
+  }
+`;
+
+const SearchButton = styled.button`
+  background-color: #5964e0;
+  border-radius: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &:hover,
+  &:focus {
+    background-color: #939bf4;
+  }
+
+  &:active {
+    transform: translateY(-48%);
+  }
+`;
 
 const SearchInput = () => {
   const [titleQuery, setTitleQuery] = useState('');
@@ -31,43 +65,35 @@ const SearchInput = () => {
 
   return (
     <>
-      <form
-        tw="relative w-full h-32"
-        className="search-container"
-        onSubmit={queryTitle}
-      >
+      <SearchForm tw="relative w-full h-32" onSubmit={queryTitle}>
         <label htmlFor="title-filter">
-          <input
+          <StyledSearchInput
             type="text"
             name="Title filter"
             id="title-filter"
             placeholder="Filter by title..."
             tw="w-full h-full px-8 focus:outline-none focus:shadow-md hover:shadow-md"
-            className="search-input"
             value={titleQuery}
             onChange={onChangeTitleQuery}
           />
         </label>
-
-        <button
+        <FilterButton
           tw="absolute transition-all duration-200 focus:outline-none"
-          className="filter-button"
           onClick={() => setIsModalShown(true)}
           type="button"
         >
           <img src={filterIcon} alt="Filter jobs" />
-        </button>
-        <button
+        </FilterButton>
+        <SearchButton
           tw="absolute right-0 mr-8 
         flex justify-center items-center h-16 w-16 text-white 
         transition-all duration-200 focus:outline-none focus:shadow-md 
         hover:shadow-md"
           type="submit"
-          className="search-button"
         >
           <i tw="transform -rotate-90 scale-125" className="las la-search"></i>
-        </button>
-      </form>
+        </SearchButton>
+      </SearchForm>
 
       {isModalShown && (
         <FilterModal

@@ -1,33 +1,52 @@
 import React from 'react';
+import styled from 'styled-components';
 import 'twin.macro';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
+const Metadata = styled.p`
+  color: #6e8098;
+`;
+
+const Title = styled.h3`
+  line-height: 2.4rem;
+`;
+
+const Location = styled.div`
+  color: #5964e0;
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+`;
+
+const ApplyNowLink = styled.a`
+  background-color: #5964e0;
+
+  &:hover,
+  &:focus {
+    background-color: #939bf4;
+  }
+`;
+
 const JobDetailsMeta = ({ created_at, type, title, location, applyLink }) => {
   return (
     <div tw="mb-12">
-      <p tw="mb-3" className="job-card-metadata">
+      <Metadata tw="mb-3">
         <span tw="mr-2">{dayjs(created_at).fromNow()}</span> &#183;
         <span tw="ml-4">{type}</span>
-      </p>
-      <h3 tw="mb-3" className="job-title">
-        {title}
-      </h3>
-      <div tw="font-bold" className="job-location">
-        {location}
-      </div>
-      <a
+      </Metadata>
+      <Title tw="mb-3">{title}</Title>
+      <Location tw="font-bold">{location}</Location>
+      <ApplyNowLink
         tw="inline-block text-center px-12 pt-6 pb-5 mt-8 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
-        className="filter-modal-search-button"
         href={applyLink}
         target="_blank"
         rel="noreferrer"
       >
         Apply Now
-      </a>
+      </ApplyNowLink>
     </div>
   );
 };
