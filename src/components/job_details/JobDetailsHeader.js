@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
-import { theme } from 'twin.macro';
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
@@ -25,9 +24,6 @@ const Container = styled.div`
     }
   }
 `;
-
-// background-color: rgba(89, 100, 224, 0.1);
-// background-color: rgba(255, 255, 255, 0.1);
 
 const CompanyLogo = styled.img`
   top: -25%;

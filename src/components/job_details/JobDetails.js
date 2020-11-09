@@ -132,7 +132,7 @@ const JobDetails = ({ jobId }) => {
         <h3 tw="mb-8">How to apply</h3>
         <p dangerouslySetInnerHTML={{ __html: job.how_to_apply }}></p>
       </HowToApply>
-      <ApplyNow tw="bg-white rounded-md p-10">
+      <ApplyNow tw="bg-white rounded-md rounded-br-none rounded-bl-none p-10">
         <a
           tw="inline-block text-center px-12 pt-6 pb-5 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
