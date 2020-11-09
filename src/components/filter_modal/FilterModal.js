@@ -14,13 +14,13 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
 const ModalContent = styled.div`
   margin: 50% 2.4rem;
   height: 21.7rem;
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 const LocationContainer = styled.div`
@@ -33,9 +33,18 @@ const LocationIcon = styled.img`
   margin-left: 2.4rem;
 `;
 
+const LocationInput = styled.input`
+  background-color: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.textColor};
+`;
+
 const InputContainer = styled.div`
   padding-left: 2.4rem;
   padding-bottom: 2.4rem;
+
+  label {
+    color: ${({ theme }) => theme.textColor};
+  }
 `;
 
 const Checkbox = styled.input`
@@ -52,17 +61,19 @@ const Label = styled.label`
     display: inline-block;
     width: 2.4rem;
     height: 2.4rem;
-    background-color: #19202d;
+    background-color: ${({ theme }) => theme.textColor};
     opacity: 0.1;
     border-radius: 3px;
 
+    ${Checkbox}:hover + &, ${Checkbox}:checked + & {
+      background-color: ${({ theme }) => theme.colors.violet};
+    }
+
     ${Checkbox}:hover + & {
-      background-color: #5964e0;
       opacity: 0.25;
     }
 
     ${Checkbox}:checked + & {
-      background-color: #5964e0;
       opacity: 1;
     }
   }
@@ -79,11 +90,11 @@ const CheckMark = styled.i`
 `;
 
 const SearchButton = styled.button`
-  background-color: #5964e0;
+  background-color: ${({ theme }) => theme.colors.violet};
 
   &:hover,
   &:focus {
-    background-color: #939bf4;
+    background-color: ${({ theme }) => theme.colors.lightViolet};
   }
 `;
 
@@ -114,17 +125,14 @@ const FilterModal = ({ setIsModalShown }) => {
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <Modal onClick={() => setIsModalShown(false)}>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-        <ModalContent
-          tw="bg-white rounded-md"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <ModalContent tw="rounded-md" onClick={(e) => e.stopPropagation()}>
           <LocationContainer tw="relative pr-10">
             <LocationIcon
               src={locationIcon}
               alt="Filter jobs"
               tw="absolute left-0"
             />
-            <input
+            <LocationInput
               type="text"
               placeholder="Filter by location..."
               tw="focus:outline-none"
@@ -133,7 +141,7 @@ const FilterModal = ({ setIsModalShown }) => {
               autoFocus
             />
           </LocationContainer>
-          <hr />
+          <hr style={{ border: '1px solid #6E8098', opacity: '0.2' }} />
           <InputContainer tw="pr-10">
             <Checkbox
               type="checkbox"

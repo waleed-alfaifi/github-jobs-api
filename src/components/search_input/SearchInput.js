@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
 import JobsContext from '../../context/JobsContext';
-import filterIcon from '../../images/mobile/icon-filter.svg';
+import FilterIcon from '../FilterIcon';
 import FilterModal from '../filter_modal/FilterModal';
 
 const SearchForm = styled.form`
@@ -13,6 +13,8 @@ const StyledSearchInput = styled.input`
   border-radius: 0.6rem;
   padding-left: 2.4rem;
   padding-right: 2.4rem;
+  background-color: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const FilterButton = styled.button`
@@ -26,14 +28,14 @@ const FilterButton = styled.button`
 `;
 
 const SearchButton = styled.button`
-  background-color: #5964e0;
+  background-color: ${({ theme }) => theme.colors.violet};
   border-radius: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
 
   &:hover,
   &:focus {
-    background-color: #939bf4;
+    background-color: ${({ theme }) => theme.colors.lightViolet};
   }
 
   &:active {
@@ -82,7 +84,7 @@ const SearchInput = () => {
           onClick={() => setIsModalShown(true)}
           type="button"
         >
-          <img src={filterIcon} alt="Filter jobs" />
+          <FilterIcon />
         </FilterButton>
         <SearchButton
           tw="absolute right-0 mr-8 

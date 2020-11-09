@@ -9,23 +9,28 @@ import { Link } from 'gatsby';
 dayjs.extend(relativeTime);
 
 const StyledJobCard = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 22.8rem;
+  &:hover {
+    box-shadow: 0 0.5rem 1.5rem ${({ theme }) => theme.boxShadow};
+  }
 `;
 
 const Metadata = styled.p`
-  color: #6e8098;
+  color: ${({ theme }) => theme.colors.darkGrey};
 `;
 
 const Title = styled.h3`
   line-height: 2.4rem;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const CompanyName = styled.p`
-  color: #6e8098;
+  color: ${({ theme }) => theme.colors.darkGrey};
 `;
 
 const Location = styled.div`
-  color: #5964e0;
+  color: ${({ theme }) => theme.colors.violet};
   font-size: 1.4rem;
   line-height: 1.7rem;
 `;
@@ -42,7 +47,7 @@ const JobCard = ({
 }) => {
   return (
     <StyledJobCard
-      tw="relative bg-white rounded-lg mb-20 p-12 pt-20 hover:shadow-md"
+      tw="relative rounded-lg mb-20 p-12 pt-20 "
       className={className}
     >
       <img

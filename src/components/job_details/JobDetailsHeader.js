@@ -1,24 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
+import { theme } from 'twin.macro';
 
 const Container = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 20.5rem;
   top: -1.4rem;
 
+  h3 {
+    color: ${({ theme }) => theme.textColor};
+  }
+
   p {
-    color: #6e8098;
+    color: ${({ theme }) => theme.colors.darkGrey};
   }
 
   a {
-    color: #5964e0;
-    background-color: rgba(89, 100, 224, 0.1);
+    background-color: ${({ theme }) => theme.buttonSecondary.backgroundColor};
+    color: ${({ theme }) => theme.buttonSecondary.textColor};
 
     &:hover {
-      background-color: rgba(89, 100, 224, 0.35);
+      background-color: ${({ theme }) => theme.buttonSecondary.hoverColor};
     }
   }
 `;
+
+// background-color: rgba(89, 100, 224, 0.1);
+// background-color: rgba(255, 255, 255, 0.1);
 
 const CompanyLogo = styled.img`
   top: -25%;
@@ -28,7 +37,7 @@ const CompanyLogo = styled.img`
 
 const JobDetailsHeader = ({ job }) => {
   return (
-    <Container tw="relative bg-white rounded-md text-center pt-20 px-8 pb-8 mb-4">
+    <Container tw="relative rounded-md text-center pt-20 px-8 pb-8 mb-4">
       <CompanyLogo
         src={
           job.company_logo ||

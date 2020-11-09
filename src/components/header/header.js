@@ -11,6 +11,7 @@ import moonIcon from '../../images/desktop/icon-moon.svg';
 
 const StyledHeader = styled.header`
   background-image: url(${bgPatternHeaderMobile});
+  background-size: cover;
 `;
 
 const CustomSiwtchLabel = styled.label`
@@ -44,7 +45,7 @@ const Slider = styled.span`
   }
 `;
 
-const Header = ({ siteTitle }) => {
+const Header = ({ siteTitle, toggleTheme }) => {
   return (
     <>
       <StyledHeader tw="h-56 px-10 pt-12 flex items-baseline">
@@ -62,6 +63,7 @@ const Header = ({ siteTitle }) => {
               name="theme-switcher"
               id="theme-switcher"
               tw="opacity-0 w-0 h-0"
+              onChange={toggleTheme}
             />
             <Slider tw="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-white transition-all duration-500" />
           </CustomSiwtchLabel>
