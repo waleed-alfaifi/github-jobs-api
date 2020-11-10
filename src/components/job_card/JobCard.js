@@ -12,7 +12,8 @@ const StyledJobCard = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 22.8rem;
   &:hover {
-    box-shadow: 0 0.5rem 1.5rem ${({ theme }) => theme.boxShadow};
+    box-shadow: 0 4px 6px -1px ${({ theme }) => theme.boxShadow},
+      0 2px 4px -1px ${({ theme }) => theme.boxShadow};
   }
 `;
 

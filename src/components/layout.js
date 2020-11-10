@@ -21,7 +21,7 @@ const lightTheme = {
   body: '#f4f6f8',
   backgroundColor: '#ffffff',
   textColor: '#19202D',
-  boxShadow: 'rgba(0, 0, 0, 0.2)',
+  boxShadow: 'rgba(0, 0, 0, 0.1)',
   iconColor: '#6E8098',
   buttonSecondary: {
     backgroundColor: 'rgba(89, 100, 224, 0.1)',
@@ -35,7 +35,7 @@ const darkTheme = {
   body: '#121721',
   backgroundColor: '#19202D',
   textColor: '#ffffff',
-  boxShadow: 'rgba(255, 255, 255, 0.2)',
+  boxShadow: 'rgba(255, 255, 255, 0.1)',
   iconColor: '#ffffff',
   buttonSecondary: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',

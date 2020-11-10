@@ -7,25 +7,26 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 const Metadata = styled.p`
-  color: #6e8098;
+  color: ${({ theme }) => theme.colors.darkGrey};
 `;
 
 const Title = styled.h3`
   line-height: 2.4rem;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const Location = styled.div`
-  color: #5964e0;
+  color: ${({ theme }) => theme.colors.violet};
   font-size: 1.4rem;
   line-height: 1.7rem;
 `;
 
 const ApplyNowLink = styled.a`
-  background-color: #5964e0;
+  background-color: ${({ theme }) => theme.colors.violet};
 
   &:hover,
   &:focus {
-    background-color: #939bf4;
+    background-color: ${({ theme }) => theme.colors.lightViolet};
   }
 `;
 

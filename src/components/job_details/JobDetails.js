@@ -7,8 +7,14 @@ import SEO from '../seo';
 import JobDetailsHeader from './JobDetailsHeader';
 import JobDetailsMeta from './JobDetailsMeta';
 
+import applyNowFooterMobile from '../../images/mobile/bg-pattern-detail-footer.svg';
+
+const DescriptionContainer = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor};
+`;
+
 const Description = styled.div`
-  color: #6e8098;
+  color: ${({ theme }) => theme.colors.darkGrey};
   line-height: 2.6rem;
 
   h1,
@@ -19,7 +25,7 @@ const Description = styled.div`
   h6,
   strong {
     display: inline-block;
-    color: #19202d;
+    color: ${({ theme }) => theme.textColor};
     font-size: 2rem;
   }
 
@@ -37,7 +43,7 @@ const Description = styled.div`
 `;
 
 const HowToApply = styled.section`
-  background-image: url('/img/mobile/bg-pattern-detail-footer.svg');
+  background-image: url(${applyNowFooterMobile});
   background-origin: border-box;
   background-position: right;
   background-size: cover;
@@ -55,13 +61,14 @@ const ApplyNow = styled.div`
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  background-color: ${({ theme }) => theme.backgroundColor};
 
   a {
-    background-color: #5964e0;
+    background-color: ${({ theme }) => theme.colors.violet};
 
     &:hover,
     &:focus {
-      background-color: #939bf4;
+      background-color: ${({ theme }) => theme.colors.lightViolet};
     }
   }
 `;
@@ -118,7 +125,7 @@ const JobDetails = ({ jobId }) => {
     <div>
       <SEO title={job.title || 'Job'} />
       <JobDetailsHeader job={job} />
-      <div tw="bg-white px-10 py-16 text-left">
+      <DescriptionContainer tw="px-10 py-16 text-left">
         <JobDetailsMeta
           created_at={job.created_at}
           type={job.type}
@@ -127,12 +134,13 @@ const JobDetails = ({ jobId }) => {
           applyLink={applyUrl}
         />
         <Description dangerouslySetInnerHTML={{ __html: job.description }} />
-      </div>
+      </DescriptionContainer>
+
       <HowToApply tw="p-12 mt-12 mb-8 text-white">
         <h3 tw="mb-8">How to apply</h3>
         <p dangerouslySetInnerHTML={{ __html: job.how_to_apply }}></p>
       </HowToApply>
-      <ApplyNow tw="bg-white rounded-md rounded-br-none rounded-bl-none p-10">
+      <ApplyNow tw="rounded-md rounded-br-none rounded-bl-none p-10">
         <a
           tw="inline-block text-center px-12 pt-6 pb-5 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
