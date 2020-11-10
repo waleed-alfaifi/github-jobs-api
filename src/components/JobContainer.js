@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
-import JobCard from '../job_card/JobCard';
+import JobCard from './JobCard';
 
-import JobsContext from '../../context/JobsContext';
+import JobsContext from '../context/JobsContext';
 
 const LoadMoreButton = styled.button`
   background-color: #5964e0;

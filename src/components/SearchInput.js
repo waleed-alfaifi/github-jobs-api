@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
-import JobsContext from '../../context/JobsContext';
-import FilterIcon from '../FilterIcon';
-import FilterModal from '../filter_modal/FilterModal';
+import JobsContext from '../context/JobsContext';
+import FilterIcon from './FilterIcon';
+import FilterModal from './FilterModal';
 
 const SearchForm = styled.form`
   top: -4.4rem;

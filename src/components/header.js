@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
-import ThemeToggler from '../ThemeToggler';
+import ThemeToggler from './ThemeToggler';
 
-import bgPatternHeaderMobile from '../../images/mobile/bg-pattern-header.svg';
+import bgPatternHeaderMobile from '../images/mobile/bg-pattern-header.svg';
 
 const StyledHeader = styled.header`
   background-image: url(${bgPatternHeaderMobile});

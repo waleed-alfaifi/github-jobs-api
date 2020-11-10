@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
 
-import JobContext from '../../context/JobsContext';
+import JobContext from '../context/JobsContext';
 
-import locationIcon from '../../images/desktop/icon-location.svg';
+import locationIcon from '../images/desktop/icon-location.svg';
 
 const Modal = styled.div`
   position: fixed;

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import SEO from '../components/seo';
-import JobContainer from '../components/jobs_container/JobContainer';
-import SearchInput from '../components/search_input/SearchInput';
+import JobContainer from '../components/JobContainer';
+import SearchInput from '../components/SearchInput';
 
 const IndexPage = () => {
   return (
