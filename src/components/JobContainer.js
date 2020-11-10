@@ -37,8 +37,9 @@ const JobContainer = () => {
 
   const fetchJobs = async () => {
     const githubJobsUrl = `https://jobs.github.com/positions.json?page=${apiPage}`;
-    const proxyUrl = '';
+    // const proxyUrl = '';
     // const proxyUrl = 'https://cors-anywhere.herokuapp.net/';
+    const proxyUrl = 'https://cors-anywhere-84.herokuapp.com/';
 
     try {
       const requestUrl = proxyUrl + githubJobsUrl;
