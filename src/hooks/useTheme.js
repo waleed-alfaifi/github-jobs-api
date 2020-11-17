@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 
 export default () => {
   const [theme, setTheme] = useState('light');
+  const [mounted, setMounted] = useState(false);
 
   // Retrieve saved theme (if any)
   useEffect(() => {
     const localTheme = localStorage.getItem('theme');
     localTheme && setTheme(localTheme);
+    setMounted(true);
   }, []);
 
   // Persist theme into local storage
@@ -18,5 +20,5 @@ export default () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
   };
 
-  return [theme, themeToggler];
+  return [theme, themeToggler, mounted];
 };

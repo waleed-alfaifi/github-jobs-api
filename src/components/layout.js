@@ -23,7 +23,11 @@ const Layout = ({ children }) => {
     }
   `);
 
-  const [theme, toggleTheme] = useTheme();
+  const [theme, toggleTheme, themeMounted] = useTheme();
+
+  if (!themeMounted) {
+    return <div />;
+  }
 
   return (
     <>

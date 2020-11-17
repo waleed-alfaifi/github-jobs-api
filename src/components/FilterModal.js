@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import 'twin.macro';
 
 import JobContext from '../context/JobsContext';
+import CustomCheckbox from './CustomCheckbox';
 
 import locationIcon from '../images/desktop/icon-location.svg';
 
@@ -44,48 +45,6 @@ const InputContainer = styled.div`
 
   label {
     color: ${({ theme }) => theme.textColor};
-  }
-`;
-
-const Checkbox = styled.input`
-  visibility: hidden;
-`;
-
-const Label = styled.label`
-  cursor: pointer;
-  padding: 0;
-
-  &::before {
-    content: '';
-    margin-right: 1.6rem;
-    display: inline-block;
-    width: 2.4rem;
-    height: 2.4rem;
-    background-color: ${({ theme }) => theme.textColor};
-    opacity: 0.1;
-    border-radius: 3px;
-
-    ${Checkbox}:hover + &, ${Checkbox}:checked + & {
-      background-color: ${({ theme }) => theme.colors.violet};
-    }
-
-    ${Checkbox}:hover + & {
-      opacity: 0.25;
-    }
-
-    ${Checkbox}:checked + & {
-      opacity: 1;
-    }
-  }
-`;
-
-const CheckMark = styled.i`
-  top: 50%;
-  left: 0.4rem;
-  transform: translateY(-50%);
-
-  ${Checkbox}:checked + ${Label} & {
-    opacity: 1;
   }
 `;
 
@@ -143,22 +102,14 @@ const FilterModal = ({ setIsModalShown }) => {
           </LocationContainer>
           <hr style={{ border: '1px solid #6E8098', opacity: '0.2' }} />
           <InputContainer tw="pr-10">
-            <Checkbox
-              type="checkbox"
-              name="full_time"
-              id="full_time"
-              tw="opacity-0"
-              className="full-time-checkbox"
+            <CustomCheckbox
+              labelName="Full Time Only"
+              checkboxName="full_time"
+              checkboxId="full_time_mobile"
+              getCheckedValue={(checked) => setIsFulltime(checked)}
               checked={isFulltime}
-              onChange={(e) => setIsFulltime(e.target.checked)}
+              setChecked={setIsFulltime}
             />
-            <Label htmlFor="full_time" tw="relative flex items-start">
-              <span tw="font-bold">Full Time Only</span>
-              <CheckMark
-                tw="absolute text-white opacity-0"
-                className="las la-check"
-              ></CheckMark>
-            </Label>
             <SearchButton
               tw="px-12 pt-6 pb-5 mt-8 w-full text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"

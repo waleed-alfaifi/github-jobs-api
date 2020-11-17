@@ -67,12 +67,11 @@ const SearchInput = () => {
 
   return (
     <>
-      <SearchForm tw="relative w-full h-32" onSubmit={queryTitle}>
-        <label htmlFor="title-filter">
+      <SearchForm tw="relative w-full h-32 md:hidden" onSubmit={queryTitle}>
+        <label>
           <StyledSearchInput
             type="text"
             name="Title filter"
-            id="title-filter"
             placeholder="Filter by title..."
             tw="w-full h-full px-8 focus:outline-none focus:shadow-md hover:shadow-md"
             value={titleQuery}
