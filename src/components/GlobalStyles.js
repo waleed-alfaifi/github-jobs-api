@@ -35,6 +35,10 @@ const GlobalStyles = createGlobalStyle`
   h4 {
     font-size: 1.4rem;
   }
+
+  * {
+    overflow-wrap: break-word;
+  }
 `;
 
 export default GlobalStyles;

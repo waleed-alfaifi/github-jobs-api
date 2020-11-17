@@ -105,29 +105,30 @@ const JobContainer = () => {
           </p>
         </div>
       )}
-      {jobs.map((job, index) => {
-        if (
-          filterBy(job.title, titleQuery) &&
-          filterBy(job.location, location_query) &&
-          filterByType(job.type, is_fulltime_query)
-        ) {
-          return (
-            <JobCard
-              jobId={job.id}
-              key={job.id}
-              imgSource={job.company_logo}
-              creationDate={job.created_at}
-              type={job.type}
-              title={job.title}
-              companyName={job.company}
-              location={job.location}
-              className={index === jobs.length - 1 ? 'last' : ''}
-            />
-          );
-        }
+      <div tw="grid gap-x-4 lg:gap-x-8 xl:gap-x-12 md:gap-y-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-24">
+        {jobs.map((job) => {
+          if (
+            filterBy(job.title, titleQuery) &&
+            filterBy(job.location, location_query) &&
+            filterByType(job.type, is_fulltime_query)
+          ) {
+            return (
+              <JobCard
+                key={job.id}
+                jobId={job.id}
+                imgSource={job.company_logo}
+                creationDate={job.created_at}
+                type={job.type}
+                title={job.title}
+                companyName={job.company}
+                location={job.location}
+              />
+            );
+          }
 
-        return '';
-      })}
+          return '';
+        })}
+      </div>
 
       {jobs.length > 0 && !fetchedAllJobs && !failedFetching && (
         <div tw="text-center mt-16 mb-24">

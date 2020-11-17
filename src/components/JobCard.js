@@ -44,29 +44,27 @@ const JobCard = ({
   title,
   companyName,
   location,
-  className,
 }) => {
   return (
-    <StyledJobCard
-      tw="relative rounded-lg mb-20 p-12 pt-20 "
-      className={className}
-    >
-      <img
-        src={
-          imgSource ||
-          'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png'
-        }
-        alt={title}
-        tw="absolute top-0 left-0 ml-12 -mt-8 w-20 h-20 bg-white p-2 shadow-xs rounded-3xl object-contain"
-      />
-      <Metadata tw="mb-3">
-        <span tw="mr-2">{dayjs(creationDate).fromNow()}</span> &#183;
-        <span tw="ml-4">{type}</span>
-      </Metadata>
-      <Title tw="mb-3">
-        <Link to={`/job/${jobId}`}>{title}</Link>
-      </Title>
-      <CompanyName tw="mb-10">{companyName}</CompanyName>
+    <StyledJobCard tw="relative flex flex-col rounded-lg mb-20 md:mb-0 last:mb-0 p-12 pt-20">
+      <div tw="flex-grow">
+        <img
+          src={
+            imgSource ||
+            'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png'
+          }
+          alt={title}
+          tw="absolute top-0 left-0 ml-12 -mt-8 w-20 h-20 bg-white p-2 shadow-xs rounded-3xl object-contain"
+        />
+        <Metadata tw="mb-3">
+          <span tw="mr-2">{dayjs(creationDate).fromNow()}</span> &#183;
+          <span tw="ml-4">{type}</span>
+        </Metadata>
+        <Title tw="mb-3">
+          <Link to={`/job/${jobId}`}>{title}</Link>
+        </Title>
+        <CompanyName tw="mb-10">{companyName}</CompanyName>
+      </div>
       <Location tw="font-bold">{location}</Location>
     </StyledJobCard>
   );
