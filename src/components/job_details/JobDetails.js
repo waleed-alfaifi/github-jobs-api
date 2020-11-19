@@ -8,6 +8,7 @@ import JobDetailsHeader from './JobDetailsHeader';
 import JobDetailsMeta from './JobDetailsMeta';
 
 import applyNowFooterMobile from '../../images/mobile/bg-pattern-detail-footer.svg';
+import applyNowFooterDesktop from '../../images/desktop/bg-pattern-detail-footer.svg';
 
 const DescriptionContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
@@ -52,16 +53,23 @@ const HowToApply = styled.section`
   p {
     word-wrap: break-word;
   }
+
+  @media (min-width: 768px) {
+    background-image: url(${applyNowFooterDesktop});
+  }
+`;
+
+const Title = styled.h3`
+  line-height: 2.4rem;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const ApplyNow = styled.div`
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   background-color: ${({ theme }) => theme.backgroundColor};
+
+  // Extend the element beyond its parent width
+  margin-left: calc(-99vw / 2 + 100% / 2);
+  margin-right: calc(-99vw / 2 + 100% / 2);
 
   a {
     background-color: ${({ theme }) => theme.colors.violet};
@@ -70,6 +78,10 @@ const ApplyNow = styled.div`
     &:focus {
       background-color: ${({ theme }) => theme.colors.lightViolet};
     }
+  }
+
+  p.company {
+    color: ${({ theme }) => theme.colors.darkGrey};
   }
 `;
 
@@ -140,16 +152,22 @@ const JobDetails = ({ jobId }) => {
         <h3 tw="mb-8">How to apply</h3>
         <p dangerouslySetInnerHTML={{ __html: job.how_to_apply }}></p>
       </HowToApply>
-      <ApplyNow tw="rounded-md rounded-br-none rounded-bl-none p-10">
-        <a
-          tw="inline-block text-center px-12 pt-6 pb-5 w-full text-white rounded-md transition transition-all
+      <ApplyNow tw="rounded-md rounded-br-none rounded-bl-none">
+        <div tw="container mx-auto p-10 flex flex-col md:flex-row items-center">
+          <div tw="hidden md:block max-w-3xl">
+            <Title tw="break-words">{job.title}</Title>
+            <p className="company">{job.company}</p>
+          </div>
+          <a
+            tw="inline-block text-center px-12 pt-6 pb-5 md:ml-auto w-full md:w-auto text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
-          href={applyUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Apply Now
-        </a>
+            href={applyUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Apply Now
+          </a>
+        </div>
       </ApplyNow>
     </div>
   );

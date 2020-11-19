@@ -32,15 +32,17 @@ const ApplyNowLink = styled.a`
 
 const JobDetailsMeta = ({ created_at, type, title, location, applyLink }) => {
   return (
-    <div tw="mb-12">
-      <Metadata tw="mb-3">
-        <span tw="mr-2">{dayjs(created_at).fromNow()}</span> &#183;
-        <span tw="ml-4">{type}</span>
-      </Metadata>
-      <Title tw="mb-3">{title}</Title>
-      <Location tw="font-bold">{location}</Location>
+    <div tw="grid md:grid-cols-3 items-center mb-12">
+      <div tw="md:col-span-2">
+        <Metadata tw="mb-3">
+          <span tw="mr-2">{dayjs(created_at).fromNow()}</span> &#183;
+          <span tw="ml-4">{type}</span>
+        </Metadata>
+        <Title tw="mb-3">{title}</Title>
+        <Location tw="font-bold">{location}</Location>
+      </div>
       <ApplyNowLink
-        tw="inline-block text-center px-12 pt-6 pb-5 mt-8 w-full text-white rounded-md transition transition-all
+        tw="inline-block text-center px-12 pt-6 pb-5 mt-8 md:mt-0 md:ml-auto md:mr-4 w-full md:w-auto text-white rounded-md transition transition-all
                          duration-100 transform focus:translate-y-1 focus:outline-none"
         href={applyLink}
         target="_blank"

@@ -23,30 +23,31 @@ const Container = styled.div`
       background-color: ${({ theme }) => theme.buttonSecondary.hoverColor};
     }
   }
-`;
 
-const CompanyLogo = styled.img`
-  top: -25%;
-  left: 50%;
-  transform: translate(-50%, 50%);
+  @media (min-width: 768px) {
+    min-height: 14rem;
+  }
 `;
 
 const JobDetailsHeader = ({ job }) => {
   return (
-    <Container tw="relative rounded-md text-center pt-20 px-8 pb-8 mb-4">
-      <CompanyLogo
+    <Container tw="flex flex-col md:flex-row items-center relative rounded-md md:rounded-bl-lg text-center md:text-left pt-20 px-8 pb-8 md:p-0 mb-4">
+      <img
         src={
           job.company_logo ||
           'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png'
         }
         alt={job.title}
-        tw="absolute w-20 h-20 bg-white p-2 shadow-xs rounded-3xl object-contain"
+        tw="md:self-stretch relative -mt-32 mb-8 md:mt-0 md:mb-0 w-20 h-20 md:w-56 md:h-auto bg-white p-2 shadow-xs rounded-3xl md:rounded-none md:rounded-bl-lg object-contain"
       />
-      <h3>{job.company}</h3>
-      <p tw="mb-12">{job.company}</p>
+
+      <div tw="md:ml-12">
+        <h3>{job.company}</h3>
+        <p tw="mb-12 md:mb-0">{job.company}</p>
+      </div>
       <a
         href={job.company_url}
-        tw="px-10 py-6 mb-6 inline-block rounded-md font-bold"
+        tw="px-10 py-6 mb-6 md:mb-0 md:ml-auto md:mr-12 inline-block rounded-md font-bold"
         target="_blank"
         rel="noreferrer"
       >
