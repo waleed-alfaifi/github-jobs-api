@@ -6,6 +6,7 @@ import JobsContext from '../../context/JobsContext';
 import SEO from '../seo';
 import JobDetailsHeader from './JobDetailsHeader';
 import JobDetailsMeta from './JobDetailsMeta';
+import Loader from '../Loader';
 
 import applyNowFooterMobile from '../../images/mobile/bg-pattern-detail-footer.svg';
 import applyNowFooterDesktop from '../../images/desktop/bg-pattern-detail-footer.svg';
@@ -93,6 +94,8 @@ const JobDetails = ({ jobId }) => {
   } = useContext(JobsContext);
   const [job, setJob] = useState({});
   const [applyUrl, setApplyUrl] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const currentJob = jobs.filter?.((job) => job.id === jobId)[0];
@@ -103,18 +106,24 @@ const JobDetails = ({ jobId }) => {
       // request that job
       fetchJob(jobId);
     }
+
+    setMounted(true);
   }, []);
 
   const fetchJob = async (jobId) => {
+    setLoading(true);
+
     try {
       const requestUrl = `${proxiedOneJobAPIUrls}/${jobId}.json`;
       const res = await fetch(requestUrl);
       const data = await res.json();
 
+      setLoading(false);
       setJob(data);
 
       return true;
     } catch (err) {
+      setLoading(false);
       console.error(err);
       return false;
     }
@@ -132,6 +141,19 @@ const JobDetails = ({ jobId }) => {
 
     return applyUrlElement?.getAttribute('href');
   };
+
+  if (!mounted) {
+    return <div />;
+  }
+
+  if (loading) {
+    return (
+      <Loader
+        blocking={loading}
+        message="Please while we are loading your data 😉."
+      ></Loader>
+    );
+  }
 
   return (
     <div>

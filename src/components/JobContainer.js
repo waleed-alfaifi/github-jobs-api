@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
+import Loader from './Loader';
 import JobCard from './JobCard';
 
 import JobsContext from '../context/JobsContext';
@@ -17,6 +18,7 @@ const LoadMoreButton = styled.button`
 
 const JobContainer = () => {
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     jobsState: {
@@ -38,10 +40,13 @@ const JobContainer = () => {
   }, []);
 
   const fetchJobs = async () => {
+    setLoading(true);
     try {
       const requestUrl = `${proxiedAPIUrl}?page=${apiPage}`;
       const res = await fetch(requestUrl);
       const data = await res.json();
+
+      setLoading(false);
 
       dispatch({ type: 'update_jobs', payload: data });
       dispatch({ type: 'update_page' });
@@ -52,6 +57,7 @@ const JobContainer = () => {
 
       return true;
     } catch (err) {
+      setLoading(false);
       console.error(err);
       await fetchJobsAlternative();
       dispatch({ type: 'failed_fetching' });
@@ -85,6 +91,21 @@ const JobContainer = () => {
 
   const filterByType = (jobType, isFullTime = false) =>
     isFullTime ? jobType.toLowerCase().includes('full time') : true;
+
+  if (loading) {
+    return (
+      <Loader
+        blocking={loading}
+        message="Please while we are loading your data 😉."
+      ></Loader>
+
+      // <BlockUi
+      //   blocking={loading}
+      //   message="Please wait for a few moments 😉."
+      //   style={{ backgroundColor: 'transparent' }}
+      // ></BlockUi>
+    );
+  }
 
   return (
     <div>
