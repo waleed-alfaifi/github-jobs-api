@@ -5,6 +5,8 @@ import JobCard from './JobCard';
 
 import JobsContext from '../context/JobsContext';
 
+import { proxiedAPIUrl, alternativeDataUrl } from '../constants/urls';
+
 const LoadMoreButton = styled.button`
   background-color: #5964e0;
   &:hover,
@@ -36,13 +38,8 @@ const JobContainer = () => {
   }, []);
 
   const fetchJobs = async () => {
-    const githubJobsUrl = `https://jobs.github.com/positions.json?page=${apiPage}`;
-    // const proxyUrl = '';
-    // const proxyUrl = 'https://cors-anywhere.herokuapp.net/';
-    const proxyUrl = 'https://cors-anywhere-84.herokuapp.com/';
-
     try {
-      const requestUrl = proxyUrl + githubJobsUrl;
+      const requestUrl = `${proxiedAPIUrl}?page=${apiPage}`;
       const res = await fetch(requestUrl);
       const data = await res.json();
 
@@ -65,8 +62,7 @@ const JobContainer = () => {
 
   const fetchJobsAlternative = async () => {
     try {
-      const requestUrl = '/data.json';
-      const res = await fetch(requestUrl);
+      const res = await fetch(alternativeDataUrl);
       const data = await res.json();
 
       dispatch({ type: 'update_jobs', payload: data });

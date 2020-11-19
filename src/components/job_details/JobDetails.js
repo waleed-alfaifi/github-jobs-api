@@ -10,6 +10,8 @@ import JobDetailsMeta from './JobDetailsMeta';
 import applyNowFooterMobile from '../../images/mobile/bg-pattern-detail-footer.svg';
 import applyNowFooterDesktop from '../../images/desktop/bg-pattern-detail-footer.svg';
 
+import { proxiedOneJobAPIUrls } from '../../constants/urls';
+
 const DescriptionContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
 `;
@@ -104,11 +106,9 @@ const JobDetails = ({ jobId }) => {
   }, []);
 
   const fetchJob = async (jobId) => {
-    const githubJobUrl = `https://jobs.github.com/positions/${jobId}.json`;
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-
     try {
-      const res = await fetch(proxyUrl + githubJobUrl);
+      const requestUrl = `${proxiedOneJobAPIUrls}/${jobId}.json`;
+      const res = await fetch(requestUrl);
       const data = await res.json();
 
       setJob(data);
