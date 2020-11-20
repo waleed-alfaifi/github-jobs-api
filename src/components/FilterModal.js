@@ -9,7 +9,7 @@ import locationIcon from '../images/desktop/icon-location.svg';
 
 const Modal = styled.div`
   position: fixed;
-  z-index: 100;
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
@@ -82,7 +82,7 @@ const FilterModal = ({ setIsModalShown }) => {
   return (
     <form onSubmit={submitFilter}>
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-      <Modal onClick={() => setIsModalShown(false)}>
+      <Modal onClick={() => setIsModalShown(false)} tw="md:hidden">
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <ModalContent tw="rounded-md" onClick={(e) => e.stopPropagation()}>
           <LocationContainer tw="relative pr-10">

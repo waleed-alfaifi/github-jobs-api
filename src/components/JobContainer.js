@@ -35,12 +35,12 @@ const JobContainer = () => {
 
   useEffect(() => {
     if (jobs <= 0) {
+      setLoading(true);
       fetchJobs();
     }
   }, []);
 
   const fetchJobs = async () => {
-    setLoading(true);
     try {
       const requestUrl = `${proxiedAPIUrl}?page=${apiPage}`;
       const res = await fetch(requestUrl);
@@ -96,14 +96,8 @@ const JobContainer = () => {
     return (
       <Loader
         blocking={loading}
-        message="Please while we are loading your data 😉."
+        message="Please while we are loading your data 😉"
       ></Loader>
-
-      // <BlockUi
-      //   blocking={loading}
-      //   message="Please wait for a few moments 😉."
-      //   style={{ backgroundColor: 'transparent' }}
-      // ></BlockUi>
     );
   }
 

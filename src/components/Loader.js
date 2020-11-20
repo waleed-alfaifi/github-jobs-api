@@ -8,6 +8,10 @@ const StyledLoader = styled(BlockUi)`
   .block-ui-overlay {
     background-color: transparent;
   }
+
+  .block-ui-message {
+    color: ${({ theme }) => theme.textColor};
+  }
 `;
 
 export default StyledLoader;
