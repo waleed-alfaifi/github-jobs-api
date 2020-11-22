@@ -150,7 +150,7 @@ const JobDetails = ({ jobId }) => {
     return (
       <Loader
         blocking={loading}
-        message="Please while we are loading your data 😉."
+        message="Please wait while we are loading your data 😉"
       ></Loader>
     );
   }
