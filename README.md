@@ -15,7 +15,7 @@ This project is done as a solution to the following challenge on Frontend Mentor
 - React Hooks and Context API
 - Figma
 
-## Achieved Tasks 🎯
+## 🎯 Achieved Tasks
 - Get the website to look as close as possible to the original design.
 - Implement light/dark theme.
 - Get jobs using the GitHub jobs API and display them.
