@@ -1,4 +1,6 @@
 # GitHub Jobs API Challenge
+GitHub Jobs API web app using Gatsby.js, Context API, Hooks, styled-components and TailwindCSS.
+
 This project is done as a solution to the following challenge on Frontend Mentor [GitHub Jobs API challenge](https://www.frontendmentor.io/solutions/mobilefirst-github-jobs-api-challenge-with-gatsbyjs-and-tailwindcss-yodXu2Mzh).
 
 ## Original Design
