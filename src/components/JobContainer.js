@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
-import 'twin.macro';
-import Loader from './Loader';
-import JobCard from './JobCard';
+import React, { useState, useEffect, useContext } from "react"
+import styled from "styled-components"
+import "twin.macro"
+import Loader from "./Loader"
+import JobCard from "./JobCard"
 
-import JobsContext from '../context/JobsContext';
+import JobsContext from "../context/JobsContext"
 
-import { proxiedAPIUrl, alternativeDataUrl } from '../constants/urls';
+import { proxiedAPIUrl, alternativeDataUrl } from "../constants/urls"
 
 const LoadMoreButton = styled.button`
   background-color: #5964e0;
@@ -14,11 +14,11 @@ const LoadMoreButton = styled.button`
   &:focus {
     background-color: #939bf4;
   }
-`;
+`
 
 const JobContainer = () => {
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const {
     jobsState: {
@@ -31,66 +31,69 @@ const JobContainer = () => {
       failedFetching,
     },
     dispatch,
-  } = useContext(JobsContext);
+  } = useContext(JobsContext)
 
   useEffect(() => {
     if (jobs <= 0) {
-      setLoading(true);
-      fetchJobs();
+      fetchJobsAlternative()
     }
-  }, []);
+  }, [])
 
   const fetchJobs = async () => {
     try {
-      const requestUrl = `${proxiedAPIUrl}?page=${apiPage}`;
-      const res = await fetch(requestUrl);
-      const data = await res.json();
+      const requestUrl = `${proxiedAPIUrl}?page=${apiPage}`
+      const res = await fetch(requestUrl)
+      const data = await res.json()
 
-      setLoading(false);
-
-      dispatch({ type: 'update_jobs', payload: data });
-      dispatch({ type: 'update_page' });
+      dispatch({ type: "update_jobs", payload: data })
+      dispatch({ type: "update_page" })
 
       if (data.length === 0) {
-        dispatch({ type: 'fetched_all_jobs' });
+        dispatch({ type: "fetched_all_jobs" })
       }
 
-      return true;
+      return true
     } catch (err) {
-      setLoading(false);
-      console.error(err);
-      await fetchJobsAlternative();
-      dispatch({ type: 'failed_fetching' });
+      console.error(err)
+      await fetchJobsAlternative()
+      dispatch({ type: "failed_fetching" })
 
-      return false;
+      return false
+    } finally {
+      setLoading(false)
     }
-  };
+  }
 
   const fetchJobsAlternative = async () => {
+    setLoading(true)
+
     try {
-      const res = await fetch(alternativeDataUrl);
-      const data = await res.json();
+      const res = await fetch(alternativeDataUrl)
+      const data = await res.json()
 
-      dispatch({ type: 'update_jobs', payload: data });
+      dispatch({ type: "update_jobs", payload: data })
+      dispatch({ type: "failed_fetching" })
 
-      return true;
+      return true
     } catch (err) {
-      console.error(err);
-      return false;
+      console.error(err)
+      return false
+    } finally {
+      setLoading(false)
     }
-  };
+  }
 
   const loadMore = async () => {
-    setLoadingMore(true);
-    await fetchJobs();
-    setLoadingMore(false);
-  };
+    setLoadingMore(true)
+    await fetchJobs()
+    setLoadingMore(false)
+  }
 
   const filterBy = (jobPropery, query) =>
-    jobPropery.toLowerCase().includes(query.toLowerCase()) || query === '';
+    jobPropery.toLowerCase().includes(query.toLowerCase()) || query === ""
 
   const filterByType = (jobType, isFullTime = false) =>
-    isFullTime ? jobType.toLowerCase().includes('full time') : true;
+    isFullTime ? jobType.toLowerCase().includes("full time") : true
 
   if (loading) {
     return (
@@ -98,26 +101,33 @@ const JobContainer = () => {
         blocking={loading}
         message="Please wait while we are loading your data 😉"
       ></Loader>
-    );
+    )
   }
 
   return (
     <div>
       {failedFetching && (
-        <div tw="bg-red-600 p-8 mb-16 -mt-8 rounded-md text-white">
+        <div tw="bg-blue-600 p-8 mb-16 -mt-8 rounded-md text-white">
           <p>
-            <strong>Warning</strong>: If you are seeing this message, that means
-            there is something wrong with the Jobs API, the sadness 😢.
+            <strong>Note:</strong> These jobs are outdated, and they are being
+            shown because the GitHub jobs API (from which jobs are fetched) has
+            been deprecated{" "}
+            <a
+              href="https://github.blog/changelog/2021-04-19-deprecation-notice-github-jobs-site/"
+              target="_blank"
+              rel="noopener"
+            >
+              (see link).
+            </a>
           </p>
           <p>
-            No one knows when it will come back to work but you can try
-            reloading the page. Until then I have put some old jobs data for you
-            to try out the website, but bear in mind they might be outdated.
+            Until we find another free jobs API, please try and enjoy the
+            experience provided by this application 😀.
           </p>
         </div>
       )}
       <div tw="grid gap-x-4 lg:gap-x-8 xl:gap-x-12 md:gap-y-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-24">
-        {jobs.map((job) => {
+        {jobs.map(job => {
           if (
             filterBy(job.title, titleQuery) &&
             filterBy(job.location, location_query) &&
@@ -134,10 +144,10 @@ const JobContainer = () => {
                 companyName={job.company}
                 location={job.location}
               />
-            );
+            )
           }
 
-          return '';
+          return ""
         })}
       </div>
 
@@ -155,7 +165,7 @@ const JobContainer = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default JobContainer;
+export default JobContainer

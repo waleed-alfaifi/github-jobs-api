@@ -1,21 +1,21 @@
-import React, { useEffect, useContext, useState } from 'react';
-import styled from 'styled-components';
-import 'twin.macro';
+import React, { useEffect, useContext, useState } from "react"
+import styled from "styled-components"
+import "twin.macro"
 
-import JobsContext from '../../context/JobsContext';
-import SEO from '../seo';
-import JobDetailsHeader from './JobDetailsHeader';
-import JobDetailsMeta from './JobDetailsMeta';
-import Loader from '../Loader';
+import JobsContext from "../../context/JobsContext"
+import SEO from "../seo"
+import JobDetailsHeader from "./JobDetailsHeader"
+import JobDetailsMeta from "./JobDetailsMeta"
+import Loader from "../Loader"
 
-import applyNowFooterMobile from '../../images/mobile/bg-pattern-detail-footer.svg';
-import applyNowFooterDesktop from '../../images/desktop/bg-pattern-detail-footer.svg';
+import applyNowFooterMobile from "../../images/mobile/bg-pattern-detail-footer.svg"
+import applyNowFooterDesktop from "../../images/desktop/bg-pattern-detail-footer.svg"
 
-import { proxiedOneJobAPIUrls } from '../../constants/urls';
+import { alternativeDataUrl, proxiedOneJobAPIUrls } from "../../constants/urls"
 
 const DescriptionContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
-`;
+`
 
 const Description = styled.div`
   color: ${({ theme }) => theme.colors.darkGrey};
@@ -44,7 +44,7 @@ const Description = styled.div`
   pre {
     white-space: pre-wrap;
   }
-`;
+`
 
 const HowToApply = styled.section`
   background-image: url(${applyNowFooterMobile});
@@ -60,12 +60,12 @@ const HowToApply = styled.section`
   @media (min-width: 768px) {
     background-image: url(${applyNowFooterDesktop});
   }
-`;
+`
 
 const Title = styled.h3`
   line-height: 2.4rem;
   color: ${({ theme }) => theme.textColor};
-`;
+`
 
 const ApplyNow = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
@@ -86,64 +86,69 @@ const ApplyNow = styled.div`
   p.company {
     color: ${({ theme }) => theme.colors.darkGrey};
   }
-`;
+`
 
 const JobDetails = ({ jobId }) => {
   const {
     jobsState: { jobs },
-  } = useContext(JobsContext);
-  const [job, setJob] = useState({});
-  const [applyUrl, setApplyUrl] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [mounted, setMounted] = useState(false);
+    dispatch,
+  } = useContext(JobsContext)
+  const [job, setJob] = useState({})
+  const [applyUrl, setApplyUrl] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const currentJob = jobs.filter?.((job) => job.id === jobId)[0];
+    const currentJob = jobs.filter?.(job => job.id === jobId)[0]
 
     if (currentJob) {
-      setJob(currentJob);
+      setJob(currentJob)
     } else {
       // request that job
-      fetchJob(jobId);
+      fetchJob(jobId)
     }
 
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
-  const fetchJob = async (jobId) => {
-    setLoading(true);
+  const fetchJob = async jobId => {
+    setLoading(true)
 
     try {
-      const requestUrl = `${proxiedOneJobAPIUrls}/${jobId}.json`;
-      const res = await fetch(requestUrl);
-      const data = await res.json();
+      const requestUrl = `${alternativeDataUrl}`
+      const res = await fetch(requestUrl)
+      const data = await res.json()
 
-      setLoading(false);
-      setJob(data);
+      dispatch({ type: "update_jobs", payload: data })
+      dispatch({ type: "failed_fetching" })
 
-      return true;
+      const job = data?.filter?.(job => job.id === jobId)[0]
+      setJob(job)
+
+      return true
     } catch (err) {
-      setLoading(false);
-      console.error(err);
-      return false;
+      console.error(err)
+      return false
+    } finally {
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    setApplyUrl(getApplyUrl(job.how_to_apply) || job.company_url);
-  }, [job]);
+    setApplyUrl(getApplyUrl(job.how_to_apply) || job.company_url)
+  }, [job])
 
-  const getApplyUrl = (applyHtml) => {
-    const parsedEl = document.createElement('html');
-    parsedEl.innerHTML = applyHtml;
+  const getApplyUrl = applyHtml => {
+    const parsedEl = document.createElement("html")
+    parsedEl.innerHTML = applyHtml
 
-    const applyUrlElement = parsedEl.querySelector('a[href]');
+    const applyUrlElement = parsedEl.querySelector("a[href]")
 
-    return applyUrlElement?.getAttribute('href');
-  };
+    return applyUrlElement?.getAttribute("href")
+  }
 
   if (!mounted) {
-    return <div />;
+    return <div />
   }
 
   if (loading) {
@@ -152,12 +157,12 @@ const JobDetails = ({ jobId }) => {
         blocking={loading}
         message="Please wait while we are loading your data 😉"
       ></Loader>
-    );
+    )
   }
 
   return (
     <div>
-      <SEO title={job.title || 'Job'} />
+      <SEO title={job.title || "Job"} />
       <JobDetailsHeader job={job} />
       <DescriptionContainer tw="px-10 py-16 text-left">
         <JobDetailsMeta
@@ -192,7 +197,7 @@ const JobDetails = ({ jobId }) => {
         </div>
       </ApplyNow>
     </div>
-  );
-};
+  )
+}
 
-export default JobDetails;
+export default JobDetails
