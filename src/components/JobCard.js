@@ -45,7 +45,7 @@ const JobCard = ({
   companyName,
   location,
 }) => {
-  const [imageUrl, setImageUrl] = useState(imageSource || 'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png');
+  const [imageUrl, setImageUrl] = useState(imgSource || 'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png');
   
   return (
     <StyledJobCard tw="relative flex flex-col rounded-lg mb-20 md:mb-0 last:mb-0 p-12 pt-20">
