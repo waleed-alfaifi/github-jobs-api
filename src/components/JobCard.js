@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import 'twin.macro';
 import dayjs from 'dayjs';
@@ -45,15 +45,15 @@ const JobCard = ({
   companyName,
   location,
 }) => {
+  const [imageUrl, setImageUrl] = useState(imageSource || 'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png');
+  
   return (
     <StyledJobCard tw="relative flex flex-col rounded-lg mb-20 md:mb-0 last:mb-0 p-12 pt-20">
       <div tw="flex-grow">
         <img
-          src={
-            imgSource ||
-            'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png'
-          }
+          src={imageUrl}
           alt={title}
+          onError={() => setImageUrl('https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png')}
           tw="absolute top-0 left-0 ml-12 -mt-8 w-20 h-20 bg-white p-2 shadow-xs rounded-3xl object-contain"
         />
         <Metadata tw="mb-3">
