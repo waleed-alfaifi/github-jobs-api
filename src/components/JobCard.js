@@ -45,7 +45,8 @@ const JobCard = ({
   companyName,
   location,
 }) => {
-  const [imageUrl, setImageUrl] = useState(imgSource || 'https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png');
+  const placeholderImg = "/company-placeholder.jpg";
+  const [imageUrl, setImageUrl] = useState(imgSource || placeholderImg);
   
   return (
     <StyledJobCard tw="relative flex flex-col rounded-lg mb-20 md:mb-0 last:mb-0 p-12 pt-20">
@@ -53,7 +54,7 @@ const JobCard = ({
         <img
           src={imageUrl}
           alt={title}
-          onError={() => setImageUrl('https://rfqassist.com/wp-content/uploads/2020/03/company-placeholder.png')}
+          onError={() => setImageUrl(placeholderImg)}
           tw="absolute top-0 left-0 ml-12 -mt-8 w-20 h-20 bg-white p-2 shadow-xs rounded-3xl object-contain"
         />
         <Metadata tw="mb-3">
