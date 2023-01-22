@@ -116,6 +116,9 @@ const JobContainer = () => {
               href="https://github.blog/changelog/2021-04-19-deprecation-notice-github-jobs-site/"
               target="_blank"
               rel="noopener"
+              style={{
+                textDecoration: 'underline'
+              }}
             >
               (see link).
             </a>
